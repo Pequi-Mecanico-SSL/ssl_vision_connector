@@ -119,8 +119,8 @@ class SSLVisionProtobufToROS(Node):
             msg = Pose2D()
 
             # Simulator uses a 9 by 6 field and flips y-axis
-            msg.x = robot.x / 1000 * 9/12
-            msg.y = -robot.y / 1000 * 6/9
+            msg.x = robot.x / 1000
+            msg.y = -robot.y / 1000
             msg.theta = robot.orientation
             publishers[index].publish(msg)
 
@@ -148,8 +148,8 @@ class SSLVisionProtobufToROS(Node):
             ball_msg = Pose2D()
             protobuf_ball = ssl_protobuf_packet.detection.balls[0]
             #print("Ball: ", protobuf_ball)
-            ball_msg.x = protobuf_ball.x
-            ball_msg.y = protobuf_ball.y
+            ball_msg.x = protobuf_ball.x / 1000
+            ball_msg.y = -protobuf_ball.y / 1000
             ball_msg.theta = 0.0
             self.ball_publisher.publish(ball_msg)
         
